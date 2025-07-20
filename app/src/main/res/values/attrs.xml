@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Declare your custom theme attribute -->
+    <attr name="colorBG" format="color" />
+    <attr name="colorTopBarBG" format="color" />
+    <attr name="colorText" format="color" />
+    <attr name="colorTextHint" format="color" />
+    <attr name="colorIcon" format="color" />
+    <attr name="colorInputBoxBG" format="color" />
+    <attr name="colorInputBoxStroke" format="color" />
+</resources>

@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Light Base Theme -->
+    <style name="Base.Theme.VerixChat" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorOnPrimary">@color/light_on_primary</item>
+        <item name="android:statusBarColor">@color/light_topBar</item>
+
+        <item name="colorBG">@color/light_BG</item>  <!-- for Background -->
+        <item name="colorTopBarBG">@color/light_topBar</item>  <!-- for TopBar Background -->
+        <item name="colorText">@color/light_text</item>  <!-- for text -->
+        <item name="colorTextHint">@color/light_textHint</item>  <!-- for Text Hint -->
+        <item name="colorIcon">@color/light_icon</item>  <!-- for Icons -->
+        <item name="colorInputBoxBG">@color/light_inputBox_BG</item>  <!-- for inputBox background -->
+        <item name="colorInputBoxStroke">@color/light_inputBox_stroke</item>  <!-- for inputBox stroke -->
+
+        <item name="android:windowLightStatusBar">true</item> <!-- dark icons on light -->
+    </style>
+
+    <!-- Applied Theme -->
+    <style name="Theme.VerixChat" parent="Base.Theme.VerixChat" />
+</resources>

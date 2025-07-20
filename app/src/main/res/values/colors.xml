@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Light Theme Colors -->
+    <color name="light_primary">#FFFFFF</color>
+    <color name="light_on_primary">#000000</color>
+    <color name="light_BG">#FFFFFF</color>
+    <color name="light_topBar">#F0F0F0</color>
+    <color name="light_text">#000000</color>
+    <color name="light_textHint">#757575</color>
+    <color name="light_icon">#000000</color>
+    <color name="light_inputBox_BG">#FFFFFF</color>
+    <color name="light_inputBox_stroke">#E0E0E0</color>
+
+    <!-- Dark Theme Colors -->
+    <color name="dark_primary">#121212</color>
+    <color name="dark_on_primary">#FFFFFF</color>
+    <color name="dark_BG">#121212</color>
+    <color name="dark_topBar">#1A1A1A</color>
+    <color name="dark_text">#FFFFFF</color>
+    <color name="dark_textHint">#BBBBBB</color>
+    <color name="dark_icon">#FFFFFF</color>
+    <color name="dark_inputBox_BG">#1E1E1E</color>
+    <color name="dark_inputBox_stroke">#2A2A2A</color>
+
+</resources>
