@@ -13,6 +13,16 @@
     <color name="light_icon">#000000</color>
     <color name="light_inputBox_BG">#FFFFFF</color>
     <color name="light_inputBox_stroke">#E0E0E0</color>
+    <color name="light_responseSelector_BG">#FFFFFF</color>
+    <color name="light_inputBox_icons_BG">#E0E0E0</color>
+
+    <color name="light_quizModeInactive_BG">#E0E0E0</color>
+    <color name="light_quizModeActive_BG">#2A2A2A</color>
+    <color name="light_quizModeInactive_elements">#000000</color>
+    <color name="light_quizModeActive_elements">#FFFFFF</color>
+
+    <color name="light_itemChat_BG">#E0E0E0</color>
+
 
     <!-- Dark Theme Colors -->
     <color name="dark_primary">#121212</color>
@@ -24,5 +34,14 @@
     <color name="dark_icon">#FFFFFF</color>
     <color name="dark_inputBox_BG">#1E1E1E</color>
     <color name="dark_inputBox_stroke">#2A2A2A</color>
+    <color name="dark_responseSelector_BG">#2A2A2A</color>
+    <color name="dark_inputBox_icons_BG">#2A2A2A</color>
+
+    <color name="dark_quizModeInactive_BG">#2A2A2A</color>
+    <color name="dark_quizModeActive_BG">#E0E0E0</color>
+    <color name="dark_quizModeInactive_elements">#FFFFFF</color>
+    <color name="dark_quizModeActive_elements">#000000</color>
+
+    <color name="dark_itemChat_BG">#2A2A2A</color>
 
 </resources>

@@ -62,4 +62,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
 
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
+    implementation("io.noties.markwon:core:4.6.2")
+    implementation("io.noties.markwon:html:4.6.2")
+
 }

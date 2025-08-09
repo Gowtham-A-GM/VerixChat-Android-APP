@@ -12,6 +12,15 @@
         <item name="colorIcon">@color/dark_icon</item>  <!-- for Icons -->
         <item name="colorInputBoxBG">@color/dark_inputBox_BG</item>  <!-- for inputBox background -->
         <item name="colorInputBoxStroke">@color/dark_inputBox_stroke</item>  <!-- for inputBox stroke -->
+        <item name="colorResponseSelectorBG">@color/dark_responseSelector_BG</item>
+        <item name="colorInputBoxIconsBG">@color/dark_inputBox_icons_BG</item>
+
+        <item name="colorQuizInactiveBG">@color/dark_quizModeInactive_BG</item>
+        <item name="colorQuizActiveBG">@color/dark_quizModeActive_BG</item>
+        <item name="colorQuizElementsInactive">@color/dark_quizModeInactive_elements</item>
+        <item name="colorQuizElementsActive">@color/dark_quizModeActive_elements</item>
+
+        <item name="colorItemChatBG">@color/dark_itemChat_BG</item>
 
         <item name="android:windowLightStatusBar">false</item> <!-- light icons on dark -->
     </style>

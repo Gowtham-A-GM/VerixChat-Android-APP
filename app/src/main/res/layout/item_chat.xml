@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/llChatUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_alignParentEnd="true"
+        >
+        <TextView
+            android:id="@+id/tvChatUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bffffffffffffffffff"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="?attr/colorText"
+            android:paddingTop="12dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/bg_item_chat"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llChatAI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llChatUser"
+        >
+        <TextView
+            android:id="@+id/tvChatAI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hellow how are you bro fine to see you after a long time, ok now waht to do ... ?"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="?attr/colorText"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

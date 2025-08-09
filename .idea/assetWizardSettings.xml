@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolsoutlined/charger/outline_charger_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialsymbolsoutlined/for_you/outline_for_you_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_quizmode" />
+                            <entry key="outputName" value="ic_tone" />
                             <entry key="sourceFile" value="C:\Users\gowth\Programming\AndroidStudioProjects\VerixChat" />
                           </map>
                         </option>

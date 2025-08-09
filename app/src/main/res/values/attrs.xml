@@ -8,4 +8,11 @@
     <attr name="colorIcon" format="color" />
     <attr name="colorInputBoxBG" format="color" />
     <attr name="colorInputBoxStroke" format="color" />
+    <attr name="colorResponseSelectorBG" format="color"/>
+    <attr name="colorInputBoxIconsBG" format="color"/>
+    <attr name="colorQuizInactiveBG" format="color"/>
+    <attr name="colorQuizActiveBG" format="color"/>
+    <attr name="colorQuizElementsInactive" format="color"/>
+    <attr name="colorQuizElementsActive" format="color"/>
+    <attr name="colorItemChatBG" format="color"/>
 </resources>

@@ -1,6 +1,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="?attr/colorInputBoxIconsBG" /> <!-- Dark pill color -->
+    <solid android:color="?attr/colorQuizInactiveBG" />
     <corners android:radius="20dp" />
     <padding
         android:bottom="4dp"

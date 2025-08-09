@@ -1,6 +1,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#2A2A2A" /> <!-- Dark pill color -->
+    <solid android:color="?attr/colorInputBoxIconsBG" /> <!-- Dark pill color -->
     <corners android:radius="20dp" />
 <!--    <padding-->
 <!--        android:bottom="4dp"-->
