@@ -1,8 +1,13 @@
 package com.example.verixchat.views
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Rect
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
@@ -11,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.verixchat.R
 import com.example.verixchat.databinding.ActivityChatBinding
@@ -23,8 +29,21 @@ class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
     private val chatViewModel: ChatViewModel by viewModels()
     private lateinit var chatAdapter: ChatAdapter
+
+    // for Current Response Type
     private var currentResponseType: String = "Default"
+
+    // for Quiz Mode
     private var isQuizMode = false
+
+    // for Speech-To-Text
+    val permissionsArray = arrayOf(android.Manifest.permission.RECORD_AUDIO)
+    lateinit var speechRecognizer: SpeechRecognizer
+    lateinit var speechRecognizerIntent: Intent
+
+    // for Text-To-Speech
+    private var isListening = false
+    private var isMuted = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +57,7 @@ class ChatActivity : AppCompatActivity() {
         setupSendButton() // Send Button Click Event
         setupToneSelector() // Response tone type selector
         setupQuizMode()
+        setupSTT()
     }
 
     // Adapter for Recycler
@@ -71,7 +91,7 @@ class ChatActivity : AppCompatActivity() {
         binding.btnSendButton.setOnClickListener {
             val question = binding.etInputText.text.toString().trim()
             if (question.isNotEmpty()) {
-                val chatModel = ChatModel(message = question, isUser = true, chatNo = currentChatNo)
+                val chatModel = ChatModel(message = question, isUser = true, chatNo = currentChatNo, isBotMessagePending = false)
                 chatViewModel.create(chatModel)
                 binding.tvWelcomeTxt.visibility = View.GONE
                 binding.etInputText.text.clear()
@@ -224,5 +244,82 @@ class ChatActivity : AppCompatActivity() {
         val typedValue = TypedValue()
         theme.resolveAttribute(attr, typedValue, true)
         return typedValue.data
+    }
+
+    // TTS
+    private fun setupSTT(){
+        // Speech to Text
+        if(checkSelfPermission(permissionsArray[0]) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, permissionsArray, 200)
+        }
+
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+        speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+
+        binding.btnMicTTS.setOnClickListener {
+            if (!isListening) {
+                // Start Listening
+                binding.etInputText.setHint("Listening...")
+                speechRecognizer.startListening(speechRecognizerIntent)
+                binding.btnMicTTS.setImageResource(R.drawable.ic_micstt_on)
+                isListening = true
+            } else {
+                // Stop Listening
+                binding.etInputText.setHint("Enter your message")
+                speechRecognizer.stopListening()
+                binding.btnMicTTS.setImageResource(R.drawable.ic_micstt_off)
+                isListening = false
+            }
+        }
+        speechRecognizer.setRecognitionListener(object : RecognitionListener{
+            override fun onReadyForSpeech(params: Bundle?) {
+
+            }
+
+            override fun onBeginningOfSpeech() {
+
+            }
+
+            override fun onRmsChanged(rmsdB: Float) {
+
+            }
+
+            override fun onBufferReceived(buffer: ByteArray?) {
+
+            }
+
+            override fun onEndOfSpeech() {
+                isListening = false
+                binding.btnMicTTS.setImageResource(R.drawable.ic_micstt_off)
+                binding.etInputText.setHint("Enter your message")
+            }
+
+            override fun onError(error: Int) {
+                isListening = false
+                binding.btnMicTTS.setImageResource(R.drawable.ic_micstt_off)
+                binding.etInputText.setHint("Enter your message")
+            }
+
+            override fun onResults(results: Bundle?) {
+                val speechToTextResult = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                if(!speechToTextResult.isNullOrEmpty()){
+                    val existingText = binding.etInputText.text.toString()
+                    val newText = speechToTextResult[0]
+                    val finalText = "$existingText $newText".trim()
+
+                    binding.etInputText.setText(finalText)
+                    binding.etInputText.setSelection(finalText.length) // Move cursor to end
+                }
+            }
+
+            override fun onPartialResults(partialResults: Bundle?) {
+
+            }
+
+            override fun onEvent(eventType: Int, params: Bundle?) {
+
+            }
+
+        })
     }
 }

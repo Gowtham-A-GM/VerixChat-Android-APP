@@ -14,8 +14,8 @@ abstract class ChatDao {
     @Insert
     abstract suspend fun createAndReturnId(chatModel: ChatModel): Long
 
-    @Query("UPDATE chats SET message = :newMessage WHERE id = :id")
-    abstract suspend  fun updateCurrentChat(id: Long, newMessage: String)
+    @Query("UPDATE chats SET message = :newMessage, isBotMessagePending = :isBotMessagePending  WHERE id = :id")
+    abstract suspend  fun updateCurrentChat(id: Long, newMessage: String, isBotMessagePending: Boolean)
 
     @Query("SELECT * FROM chats WHERE chatNo = :chatNo ORDER BY id")
     abstract suspend fun getChatsByChatNo(chatNo: Long): List<ChatModel>

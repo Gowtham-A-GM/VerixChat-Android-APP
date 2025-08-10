@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.verixchat.R
@@ -14,8 +15,10 @@ class ChatViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private val tvChatUser: TextView = itemView.findViewById(R.id.tvChatUser)
     private val tvChatAI: TextView = itemView.findViewById(R.id.tvChatAI)
-    private val llChatUser: LinearLayout = itemView.findViewById(R.id.llChatUser)
-    private val llChatAI: LinearLayout = itemView.findViewById(R.id.llChatAI)
+    private val llChatUser: RelativeLayout = itemView.findViewById(R.id.llChatUser)
+    private val llChatAI: RelativeLayout = itemView.findViewById(R.id.llChatAI)
+
+    private val llAiActions: LinearLayout = itemView.findViewById(R.id.ll_aiActions)
     private val markwon = Markwon.create(itemView.context)
 
     fun bind(chatModel: ChatModel) {
@@ -27,10 +30,17 @@ class ChatViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             llChatAI.visibility = View.VISIBLE
             llChatUser.visibility = View.GONE
 
-            // Render AI response with Markdown formatting
             markwon.setMarkdown(tvChatAI, chatModel.message)
+
+            // Use isPending instead of checking text
+            if (chatModel.isBotMessagePending) {
+                llAiActions.visibility = View.GONE
+            } else {
+                llAiActions.visibility = View.VISIBLE
+            }
         }
     }
+
 }
 
 class ChatAdapter: RecyclerView.Adapter<ChatViewHolder>() {

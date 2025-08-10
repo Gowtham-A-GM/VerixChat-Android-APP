@@ -23,27 +23,28 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
     private val chatDao: ChatDao = ChatDB.getDatabase(application).chatDao()
     val allChats: LiveData<List<ChatModel>> = chatDao.readAllChats()
     val app = getApplication<Application>()
+
     // for Text-to-Speech
-//    private var textToSpeech: TextToSpeech? = null
-//    private var isTTSReady = false
-//    private var isMuted: Boolean = false
-//    private var lastReply: String? = null
-//    private var wasInterrupted: Boolean = false
+    private var textToSpeech: TextToSpeech? = null
+    private var isTTSReady = false
+    private var isMuted: Boolean = false
+    private var lastReply: String? = null
+    private var wasInterrupted: Boolean = false
 
     // Initialisation of Text-to-Speech(TTS)
-//    init {
-//        textToSpeech = TextToSpeech(app) { status ->
-//            if (status == TextToSpeech.SUCCESS) {
-//                val result = textToSpeech?.setLanguage(Locale.US)
-//                isTTSReady = result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED
-//                if (!isTTSReady) {
-//                    Toast.makeText(app, "TTS language not supported", Toast.LENGTH_SHORT).show()
-//                }
-//            } else {
-//                Toast.makeText(app, "TTS initialization failed", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+    init {
+        textToSpeech = TextToSpeech(app) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = textToSpeech?.setLanguage(Locale.US)
+                isTTSReady = result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED
+                if (!isTTSReady) {
+                    Toast.makeText(app, "TTS language not supported", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(app, "TTS initialization failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     //Coroutine of DB
     fun create(chatModel: ChatModel) = viewModelScope.launch{
@@ -54,8 +55,8 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
         return chatDao.createAndReturnId(chatModel)
     }
 
-    fun updateCurrentChat(id: Long, newMessage: String) = viewModelScope.launch{
-        chatDao.updateCurrentChat(id, newMessage)
+    fun updateCurrentChat(id: Long, newMessage: String, isBotMessagePending: Boolean) = viewModelScope.launch{
+        chatDao.updateCurrentChat(id, newMessage, isBotMessagePending)
     }
 
     fun deleteChatById(id: Long) = viewModelScope.launch{
@@ -80,26 +81,26 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
                 val geminiChat = generativeModel.startChat(history = historyContent)
 
                 // Insert placeholder
-                val placeholder = ChatModel(message = "Typing...", isUser = false, chatNo = chatNo)
+                val placeholder = ChatModel(message = "Typing...", isUser = false, chatNo = chatNo, isBotMessagePending = true)
                 insertedId = createAndReturnId(placeholder)
 
                 // Send message and update placeholder
                 val response = geminiChat.sendMessage(prompt)
                 val reply = response.text ?: "No response"
-                updateCurrentChat(insertedId, reply)
+                updateCurrentChat(insertedId, reply, isBotMessagePending = false)
 
                 // Text to Speech
                 // Speak if TTS is ready
-//                lastReply = reply
-//                wasInterrupted = false
-//                if (isTTSReady && !isMuted) {
-//                    Log.d("TTS", "Speaking: $reply")
-//                    textToSpeech?.speak(reply, TextToSpeech.QUEUE_FLUSH, null, null)
-//                    lastReply = reply  // Now store it, because we actually spoke it
-//                } else {
-//                    Log.d("TTS", "TTS not triggered. isTTSReady=$isTTSReady, isMuted=$isMuted")
-//                    lastReply = null // Don't store this, as it wasn't spoken
-//                }
+                lastReply = reply
+                wasInterrupted = false
+                if (isTTSReady && !isMuted) {
+                    Log.d("TTS", "Speaking: $reply")
+                    textToSpeech?.speak(reply, TextToSpeech.QUEUE_FLUSH, null, null)
+                    lastReply = reply  // Now store it, because we actually spoke it
+                } else {
+                    Log.d("TTS", "TTS not triggered. isTTSReady=$isTTSReady, isMuted=$isMuted")
+                    lastReply = null // Don't store this, as it wasn't spoken
+                }
 
             }  catch (e: Exception) {
                 // Remove "Typing..." if it was inserted
@@ -120,22 +121,22 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    // Mute/Unmute logic with correct handling
-//    fun setMuted(muted: Boolean) {
-//        isMuted = muted
-//        if (muted && textToSpeech?.isSpeaking == true) {
-//            textToSpeech?.stop()
-//            wasInterrupted = true
-//        } else if (!muted && wasInterrupted) {
-//            speakLastReplyAgain()
-//            wasInterrupted = false
-//        }
-//    }
+//     Mute/Unmute logic with correct handling
+    fun setMuted(muted: Boolean) {
+        isMuted = muted
+        if (muted && textToSpeech?.isSpeaking == true) {
+            textToSpeech?.stop()
+            wasInterrupted = true
+        } else if (!muted && wasInterrupted) {
+            speakLastReplyAgain()
+            wasInterrupted = false
+        }
+    }
 
-//    private fun speakLastReplyAgain() {
-//        if (isTTSReady && !isMuted && lastReply != null) {
-//            Log.d("TTS", "Resuming last reply: $lastReply")
-//            textToSpeech?.speak(lastReply, TextToSpeech.QUEUE_FLUSH, null, null)
-//        }
-//    }
+    private fun speakLastReplyAgain() {
+        if (isTTSReady && !isMuted && lastReply != null) {
+            Log.d("TTS", "Resuming last reply: $lastReply")
+            textToSpeech?.speak(lastReply, TextToSpeech.QUEUE_FLUSH, null, null)
+        }
+    }
 }

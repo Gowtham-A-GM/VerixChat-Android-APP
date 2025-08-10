@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llChatUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_alignParentEnd="true"
-        >
+        android:layout_alignParentEnd="true">
+
         <TextView
             android:id="@+id/tvChatUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bffffffffffffffffff"
+            android:text="User message goes here !"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:textColor="?attr/colorText"
@@ -23,29 +24,88 @@
             android:paddingBottom="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:background="@drawable/bg_item_chat"
-            />
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_item_chat" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/tvChatUser"
+            android:id="@+id/userActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentEnd="true">
 
-    <LinearLayout
+            <ImageButton
+                android:id="@+id/btnTTSUser"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Text to speech"
+                android:src="@drawable/ic_tts"
+                app:tint="?attr/colorIcon" />
+
+            <ImageButton
+                android:id="@+id/btnCopyUser"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Copy text"
+                android:src="@drawable/ic_copy_text_chatitem"
+                app:tint="?attr/colorIcon" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/llChatAI"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_below="@+id/llChatUser"
         >
         <TextView
             android:id="@+id/tvChatAI"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hellow how are you bro fine to see you after a long time, ok now waht to do ... ?"
+            android:text="hellow hu brotime, ok now waht to do ... ?"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:textColor="?attr/colorText"
-            android:padding="10dp"
+
             />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/tvChatAI"
+            android:id="@+id/ll_aiActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true">
+
+            <ImageButton
+                android:id="@+id/btnTTSAi"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Text to speech"
+                android:src="@drawable/ic_tts"
+                app:tint="?attr/colorIcon" />
+
+            <ImageButton
+                android:id="@+id/btnCopyAi"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Copy text"
+                android:src="@drawable/ic_copy_text_chatitem_ai"
+                app:tint="?attr/colorIcon" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 

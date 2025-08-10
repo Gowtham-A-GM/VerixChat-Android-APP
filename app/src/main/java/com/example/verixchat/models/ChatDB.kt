@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ChatModel::class], version = 1, exportSchema = false)
+@Database(entities = [ChatModel::class], version = 2, exportSchema = false)
 abstract class ChatDB: RoomDatabase() {
 
 
@@ -19,6 +19,7 @@ abstract class ChatDB: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext, ChatDB::class.java, "VerixChatDB"
                 )
+                    .fallbackToDestructiveMigration() // wipes DB when version changes
                     .build()
                 INSTANCE = instance
                 instance

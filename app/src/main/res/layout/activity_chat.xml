@@ -245,7 +245,7 @@
 
             <!-- Mic Button -->
             <ImageButton
-                android:id="@+id/btn_btnMic"
+                android:id="@+id/btn_micTTS"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="8dp"
@@ -253,7 +253,7 @@
                 android:layout_toLeftOf="@id/btn_sendButton"
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:contentDescription="Mic"
-                android:src="@drawable/ic_mic"
+                android:src="@drawable/ic_micstt_off"
                 app:tint="?attr/colorIcon" />
 
             <!-- Send Button -->

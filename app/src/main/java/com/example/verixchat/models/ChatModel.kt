@@ -9,5 +9,6 @@ data class ChatModel(
     val id: Long = 0,
     val message: String,
     val isUser: Boolean,
-    val chatNo: Long
+    val chatNo: Long,
+    val isBotMessagePending: Boolean // new flag for AI typing state
 )
